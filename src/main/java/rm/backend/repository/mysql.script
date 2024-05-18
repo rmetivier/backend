@@ -1,0 +1,38 @@
+## préfixe pour toutes les tanles du projet: fa
+
+## création des tables Mysql
+create table fauser (
+    id  bigint(20) unsigned NOT NULL auto_increment,
+    login varchar(255),
+    pwd   varchar(255),
+    pwdgen varchar(255),
+    email varchar(255),
+    role varchar(255),
+    dateCrt datetime,
+    dateLastUse datetime,
+    primary key (id)
+    )
+create table facategorie (
+    id  bigint(20) unsigned NOT NULL auto_increment,  ordre integer, title varchar(255),
+    primary key (id))
+create table fafavori (
+    id  bigint(20) unsigned NOT NULL auto_increment, description varchar(255), id_categorie bigint, libelle_categorie varchar(255), ordre integer, seq bigint not null, title varchar(255), url varchar(255),
+    primary key (id))
+
+## que pour base H2:
+create sequence categorie_seq start with 1 increment by 50
+create sequence favori_seq start with 1 increment by 50
+
+## init base
+INSERT INTO categorie (ordre, title) VALUES (100, 'XLR');
+INSERT INTO categorie (ordre, title) VALUES (100, 'XLR');
+INSERT INTO categorie (ordre, title) VALUES (10, 'Equipe');
+INSERT INTO categorie (ordre, title) VALUES (20, 'Doc');
+INSERT INTO categorie (ordre, title) VALUES (30, 'Application');
+INSERT INTO categorie (ordre, title) VALUES (40, 'Craft');
+INSERT INTO categorie (ordre, title) VALUES (50, 'Formation');
+INSERT INTO categorie (ordre, title) VALUES (60, 'Finops');
+INSERT INTO categorie (ordre, title) VALUES (35, 'Tools');
+
+
+INSERT INTO fauser (login, pwd,role) VALUES ('richard','richard', 'admin');

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import rm.backend.bean.Login;
 import rm.backend.model.Categorie;
 import rm.backend.model.Favori;
+import rm.backend.model.User;
 import rm.backend.repository.CategorieRepository;
 import rm.backend.repository.FavoriRepository;
+import rm.backend.repository.UserRepository;
 import rm.backend.services.DBService;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ import java.util.Optional;
 
         Logger logger = LogManager.getLogger(MainController.class);
         @Autowired
+        UserRepository userRepository;
+        @Autowired
         CategorieRepository categorieRepository;
         @Autowired
         FavoriRepository favoriRepository;
@@ -36,9 +40,17 @@ import java.util.Optional;
         public String home(Model model) {
             return "hello world";
         }
+
+
+
         @PostMapping("/login")
         public ResponseEntity<List<Categorie>> login(@RequestBody Login login) {
-            return new ResponseEntity<>(dbService.getCategories(), HttpStatus.OK);
+            Optional<User> oUser = userRepository.findByLoginAndPwd(login.getUser(), login.getPassword());
+            if (oUser.isPresent()) {
+                return new ResponseEntity<>(dbService.getCategories(), HttpStatus.OK);
+            } else{
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
         }
         @GetMapping("/initDB")
         public ResponseEntity<List<Favori>> initDb() {
