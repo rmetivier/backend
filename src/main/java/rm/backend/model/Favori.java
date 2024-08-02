@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "favori")
+@Table(name = "fafavori")
 public class Favori {
 
     public Favori() {}
@@ -25,12 +25,13 @@ public class Favori {
     }
 */
 
-    public Favori(long idCategorie, String title, String description, int ordre, String url) {
+    public Favori(long idUser,long idCategorie, String title, String description, int ordre, String url) {
+        this.idUser      = idUser;
         this.idCategorie = idCategorie;
-        this.title = title;
+        this.title       = title;
         this.description = description;
-        this.ordre = ordre;
-        this.url = url;
+        this.ordre       = ordre;
+        this.url         = url;
     }
 
     @Id
@@ -38,25 +39,25 @@ public class Favori {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-/*
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCategorie", referencedColumnName = "id")
-    private Categorie categorie;
-*/
+    @Column(name = "idUser")
+    private long idUser;
     @Column(name = "idCategorie")
     private long idCategorie;
-
+    @Column(name = "ordre")
+    private int  ordre;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "ordre")
-    private int  ordre;
     @Column(name = "url")
     private String url;
-
 
     private long seq;
     private String libelleCategorie;
 
+    /*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCategorie", referencedColumnName = "id")
+    private Categorie categorie;
+    */
 }

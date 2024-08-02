@@ -1,6 +1,7 @@
 package rm.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;

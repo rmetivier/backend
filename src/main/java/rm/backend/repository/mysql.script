@@ -11,13 +11,23 @@ create table fauser (
     dateCrt datetime,
     dateLastUse datetime,
     primary key (id)
-    )
+    );
 create table facategorie (
     id  bigint(20) unsigned NOT NULL auto_increment,  ordre integer, title varchar(255),
-    primary key (id))
+    primary key (id)
+    );
 create table fafavori (
-    id  bigint(20) unsigned NOT NULL auto_increment, description varchar(255), id_categorie bigint, libelle_categorie varchar(255), ordre integer, seq bigint not null, title varchar(255), url varchar(255),
-    primary key (id))
+    id           bigint(20) unsigned NOT NULL auto_increment,
+    id_user      bigint ,
+    id_categorie bigint,
+    ordre        integer,
+    title        varchar(255),
+    description  varchar(255),
+    url          varchar(255),
+    seq          bigint(20) NOT NULL,
+    libelle_categorie varchar(255) DEFAULT NULL,
+    primary key (id)
+    );
 
 ## que pour base H2:
 create sequence categorie_seq start with 1 increment by 50
@@ -36,3 +46,11 @@ INSERT INTO categorie (ordre, title) VALUES (35, 'Tools');
 
 
 INSERT INTO fauser (login, pwd,role) VALUES ('richard','richard', 'admin');
+
+
+INSERT INTO fafavori(id,id_user,description,id_categorie,ordre,title,url) VALUES
+(1,0,'application',1,1,'dvddac','https://xlrelease.azfr.allianz/#/templates/Folder9cef947e0bf349a5bab7fea88cdaabc8-Folderfa65b5781e3f4b2eb5ee60d3fff75559-Folder0f32790d37484c6f9b33a2289e71b90c-Releasefeef0133fb1a4c0fb37afda2d6d637e2'),
+(2,0,'Avis Sinistre Grave',2,1,'ASG','https://xlrelease.azfr.allianz/#/templates/Folder9cef947e0bf349a5bab7fea88cdaabc8-Folderfa65b5781e3f4b2eb5ee60d3fff75559-Folder0f32790d37484c6f9b33a2289e71b90c-Releasefeef0133fb1a4c0fb37afda2d6d637e2'),
+(3,0,'<a href=\"https://www.tf1.fr\" target=\"_new\">test </a>',3,1,'Xlr pour change Route53 sur un namespace. (qd change cluster)','https://xlrelease.azfr.allianz/#/templates/Folder9cef947e0bf349a5bab7fea88cdaabc8-Folderfa65b5781e3f4b2eb5ee60d3fff75559-Folder0f32790d37484c6f9b33a2289e71b90c-Releasefeef0133fb1a4c0fb37afda2d6d637e2'),
+(4,0,'toutes les infos',1,1,'Communaute DevOps et Integration','https://allianzms.sharepoint.com/teams/FR0023-6442517');
+
